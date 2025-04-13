@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
 import google.generativeai as genai
+import os
 
 app = Flask(__name__)
-genai.configure(api_key="AIzaSyCG0jDK2LEOrauyvwRmLxErgrE1h1C5ims")
+
+# استخدم متغير البيئة بدلاً من كتابة المفتاح في الكود
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
 model = genai.GenerativeModel('gemini-pro')
 
 @app.route('/ask')
